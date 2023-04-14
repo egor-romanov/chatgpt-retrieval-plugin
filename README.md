@@ -41,6 +41,7 @@ This README provides detailed information on how to set up, develop, and deploy 
     - [Milvus](#milvus)
     - [Qdrant](#qdrant)
     - [Redis](#redis)
+    - [Supabase](#supabase)
   - [Running the API Locally](#running-the-api-locally)
   - [Testing a Localhost Plugin in ChatGPT](#testing-a-localhost-plugin-in-chatgpt)
   - [Personalization](#personalization)
@@ -119,6 +120,10 @@ Follow these steps to quickly set up and run the ChatGPT Retrieval Plugin:
    export REDIS_DOC_PREFIX=<your_redis_doc_prefix>
    export REDIS_DISTANCE_METRIC=<your_redis_distance_metric>
    export REDIS_INDEX_TYPE=<your_redis_index_type>
+
+   # Supabase
+   export SUPABASE_URL=<supabase_project_url>
+   export SUPABASE_ANON_KEY=<supabase_project_api_anon_key>
    ```
 
 9. Run the API locally: `poetry run start`
@@ -230,11 +235,11 @@ poetry install
 
 The API requires the following environment variables to work:
 
-| Name             | Required | Description                                                                                                                                                                                |
-| ---------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `DATASTORE`      | Yes      | This specifies the vector database provider you want to use to store and query embeddings. You can choose from `pinecone`, `weaviate`, `zilliz`, `milvus`, `qdrant`, or `redis`.           |
-| `BEARER_TOKEN`   | Yes      | This is a secret token that you need to authenticate your requests to the API. You can generate one using any tool or method you prefer, such as [jwt.io](https://jwt.io/).                |
-| `OPENAI_API_KEY` | Yes      | This is your OpenAI API key that you need to generate embeddings using the `text-embedding-ada-002` model. You can get an API key by creating an account on [OpenAI](https://openai.com/). |
+| Name             | Required | Description                                                                                                                                                                                  |
+| ---------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `DATASTORE`      | Yes      | This specifies the vector database provider you want to use to store and query embeddings. You can choose from `pinecone`, `weaviate`, `zilliz`, `milvus`, `qdrant`, `redis`, or `supabase`. |
+| `BEARER_TOKEN`   | Yes      | This is a secret token that you need to authenticate your requests to the API. You can generate one using any tool or method you prefer, such as [jwt.io](https://jwt.io/).                  |
+| `OPENAI_API_KEY` | Yes      | This is your OpenAI API key that you need to generate embeddings using the `text-embedding-ada-002` model. You can get an API key by creating an account on [OpenAI](https://openai.com/).   |
 
 ### Choosing a Vector Database
 
@@ -275,6 +280,10 @@ It is light-weight, easy-to-use, and requires no additional deployment.
 All you need to do is specifying a few environment variables (optionally point to an existing saved Index json file).
 Note that metadata filters in queries are not yet supported.
 For detailed setup instructions, refer to [`/docs/providers/llama/setup.md`](/docs/providers/llama/setup.md).
+
+#### Supabase
+
+[Supabase](https://supabase.com/blog/openai-embeddings-postgres-vector) offers an easy and efficient way to store vectors via [pgvector](https://github.com/pgvector/pgvector) extension for Postgres Database. [You can use Supabase CLI](https://github.com/supabase/cli) to set up a whole Supabase stack locally or in the cloud or you can also use docker-compose, k8s and other options available. For a hosted/managed solution, try [Supabase.com](https://supabase.com/) and unlock the full power of Postgres with built-in authentication, storage, auto APIs, and Realtime features. For detailed setup instructions, refer to [`/docs/providers/supabase/setup.md`](/docs/providers/supabase/setup.md).
 
 ### Running the API locally
 
@@ -457,3 +466,5 @@ We would like to extend our gratitude to the following contributors for their co
 - [Redis](https://redis.io/)
   - [spartee](https://github.com/spartee)
   - [tylerhutcherson](https://github.com/tylerhutcherson)
+- [Supabase](https://supabase.com/)
+  - [egor-romanov](https://github.com/egor-romanov)
